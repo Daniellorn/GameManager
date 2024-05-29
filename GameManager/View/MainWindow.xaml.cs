@@ -1,4 +1,5 @@
-﻿using GameManager.View;
+﻿using GameManager.net;
+using GameManager.View;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,14 +18,22 @@ namespace GameManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string Username { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
         private void ConnectButton(object sender, RoutedEventArgs e)
         {
-            SecondWindow newWindow = new SecondWindow();
+
+            SecondWindow newWindow = new SecondWindow(Username);
             this.Visibility = Visibility.Hidden;
+
+            Client client = new Client(Username);
+            client.ConnectToServer();
+
             newWindow.Show(); //tutaj jeszcze serwer sie uruchamia 
 
             Application.Current.MainWindow = newWindow;

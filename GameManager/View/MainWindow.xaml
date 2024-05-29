@@ -51,6 +51,7 @@
                          VerticalContentAlignment="Center"
                          HorizontalAlignment="Center"
                          Margin="0,60,0,0"
+                         x:Name="UsernameTextBox"
                          Style="{StaticResource NewTextBox}"/>
 
                 <Button Content="Connect"

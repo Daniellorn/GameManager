@@ -48,11 +48,22 @@
             <StackPanel Grid.Row="1"
                         Height="auto">
 
+                <TextBlock x:Name="Username"
+                           FontSize="18"
+                           Foreground="White"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           TextAlignment="Center"
+                           Width="150"
+                           Height="30"
+                           Margin="0,30,0,0"/>
+
+
                 <Button x:Name="Add_Button"
                         Content="Add game"
                         Width="150"
                         Height="30"
-                        Margin="0,80,0,0"/>
+                        Margin="0,40,0,0"/>
 
                 <Button x:Name="Edit_Button"
                         Content="Edit"
@@ -74,6 +85,12 @@
 
             </StackPanel>
 
+
+            <DataGrid Grid.Row="2"
+                      Grid.Column="2"
+                      Margin="10">
+                
+            </DataGrid>
 
         </Grid>
 

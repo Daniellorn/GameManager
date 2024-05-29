@@ -19,9 +19,10 @@ namespace GameManager.View
     /// </summary>
     public partial class SecondWindow : Window
     {
-        public SecondWindow()
+        public SecondWindow(string username)
         {
             InitializeComponent();
+            Username.Text = username;
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
