@@ -28,11 +28,13 @@ namespace GameManager
         private void ConnectButton(object sender, RoutedEventArgs e)
         {
 
-            SecondWindow newWindow = new SecondWindow(Username);
-            this.Visibility = Visibility.Hidden;
-
             Client client = new Client(Username);
             client.ConnectToServer();
+
+
+            SecondWindow newWindow = new SecondWindow(Username, client);
+            this.Visibility = Visibility.Hidden;
+
 
             newWindow.Show(); //tutaj jeszcze serwer sie uruchamia 
 

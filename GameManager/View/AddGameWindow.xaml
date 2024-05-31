@@ -1,0 +1,109 @@
+﻿<Window x:Class="GameManager.View.AddGameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GameManager.View"
+        mc:Ignorable="d"
+        Title="AddGameWindow" 
+        Height="450" 
+        Width="800"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Transparent">
+
+    <Border Background="#272537"
+            CornerRadius="10">
+
+
+        <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Height="auto">
+
+                <TextBlock  Text="Title"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Foreground="White"
+                            FontSize="20"
+                            Margin="10,50,0,0"/>
+
+                <TextBox    Width="125"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            Margin="10"
+                            FontSize="15"
+                            x:Name="TitleBox"/>
+
+                <TextBlock  Text="Developer"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Foreground="White"
+                            FontSize="20"
+                            Margin="10,50,0,0"/>
+
+                <TextBox    Width="125"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            Margin="10"
+                            FontSize="15"
+                            x:Name="DeveloperBox"/>
+
+
+                <TextBlock  Text="Raiting"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Foreground="White"
+                            FontSize="20"
+                            Margin="10,50,0,0"/>
+
+                <TextBox    Width="125"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            Margin="10"
+                            FontSize="15"
+                            x:Name="RaitingBox">
+                </TextBox>
+
+            </StackPanel>
+
+            <TextBlock Grid.Column="1"
+                       Text="Review"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left"
+                       Foreground="White"
+                       FontSize="20"
+                       Margin="100,70,0,0"/>
+
+            <TextBox Width="350"
+                     Height="250"
+                     FontSize="15"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     Grid.Column="1"
+                     Margin="100,20,0,0"
+                     Padding="10"
+                     x:Name="ReviewBox"/>
+
+            <Button Content="Add Game"
+                    Width="150"
+                    Height="30"
+                    Grid.Column="1"
+                    VerticalAlignment="Bottom"
+                    HorizontalContentAlignment="Center"
+                    HorizontalAlignment="Right"
+                    Margin="0,0,0,30" 
+                    Click="AddGame_Click"/>
+
+        </Grid>
+        
+    </Border>
+    
+    
+</Window>

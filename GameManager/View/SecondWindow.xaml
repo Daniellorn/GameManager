@@ -63,7 +63,7 @@
                         Content="Add game"
                         Width="150"
                         Height="30"
-                        Margin="0,40,0,0"/>
+                        Margin="0,40,0,0" Click="Add_Button_Click"/>
 
                 <Button x:Name="Edit_Button"
                         Content="Edit"
