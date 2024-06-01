@@ -15,11 +15,5 @@ namespace Serwer.Data
         public string Review { get; set; }
 
 
-        public override string ToString()
-        {
-            return $"Game ID: {GameId}, Title: {Title}, Developer: {Developer}, Rating: {Rating}, Review: {Review}";
-        }
-
-
     }
 }

@@ -40,11 +40,7 @@ namespace TcpServer
             byte[] buffer = new byte[1024];
             int bytesRead;
 
-            NetworkStream stream = client.GetStream();
-
-            //bytesRead = stream.Read(buffer, 0, buffer.Length);
-            //string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            //Console.WriteLine("Odebrano: {0}", dataReceived);    
+            NetworkStream stream = client.GetStream();    
 
             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
             {
@@ -54,6 +50,11 @@ namespace TcpServer
 
                 DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
                 Console.WriteLine($"{dataServer.Title}");
+
+
+                var SaveToDB = new UsingDB();
+                SaveToDB.SaveData(dataServer);
+
             }
         }
 

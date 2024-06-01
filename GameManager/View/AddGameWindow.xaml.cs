@@ -20,7 +20,6 @@ namespace GameManager.View
 {
     public partial class AddGameWindow : Window
     {
-        static int _gameId = 1;
         private Client _client;
 
         public AddGameWindow(Client client)
@@ -33,7 +32,6 @@ namespace GameManager.View
         {
             DataClient gameData = new DataClient()
             {
-                GameId = _gameId,
                 Title = TitleBox.Text,
                 Developer = DeveloperBox.Text,
                 Rating = RatingBox.Text,
@@ -41,7 +39,6 @@ namespace GameManager.View
             };
 
             _client.SendGameData(gameData);
-            _gameId++;
             this.Close();
         }
     }

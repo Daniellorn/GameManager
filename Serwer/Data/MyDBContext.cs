@@ -15,5 +15,10 @@ namespace Serwer.Data
         {
             optionsBuilder.UseSqlServer("Data Source=LAPTOP-6TTPBBUD\\SQLEXPRESS;Initial Catalog=GameManagerDB;Integrated Security=True;Trust Server Certificate=True");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DataServer>().HasKey(d => d.GameId);
+        }
     }
 }
