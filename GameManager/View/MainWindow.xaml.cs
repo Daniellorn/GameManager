@@ -13,9 +13,6 @@ using System.Windows.Shapes;
 
 namespace GameManager
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public string Username { get; set; }
@@ -27,16 +24,11 @@ namespace GameManager
         }
         private void ConnectButton(object sender, RoutedEventArgs e)
         {
-
-            Client client = new Client(Username);
-            client.ConnectToServer();
-
-
-            SecondWindow newWindow = new SecondWindow(Username, client);
+            SecondWindow newWindow = new SecondWindow(Username);
             this.Visibility = Visibility.Hidden;
 
 
-            newWindow.Show(); //tutaj jeszcze serwer sie uruchamia 
+            newWindow.Show();
 
             Application.Current.MainWindow = newWindow;
         }

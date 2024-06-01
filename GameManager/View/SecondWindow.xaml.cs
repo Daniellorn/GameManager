@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,23 +21,24 @@ namespace GameManager.View
     /// </summary>
     public partial class SecondWindow : Window
     {
-        private readonly Client _client;
-        public SecondWindow(string username, Client client)
+        private Client _tcpClient;
+        public SecondWindow(string username)
         {
             InitializeComponent();
             Username.Text = username;
-            _client = client;
+            _tcpClient = new Client();
+            _tcpClient.ConnectToServer();
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
-            _client.Disconnect();
+            _tcpClient.Disconnect();
             Application.Current.Shutdown();
         }
 
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
-            AddGameWindow addGameWindow = new AddGameWindow(_client);
+            AddGameWindow addGameWindow = new AddGameWindow(_tcpClient);
             addGameWindow.Show();
         }
     }

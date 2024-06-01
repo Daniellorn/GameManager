@@ -26,6 +26,8 @@ namespace TcpServer
                 Console.WriteLine("Client has connected");
 
                 HandleClient(client);
+
+                Console.WriteLine("Client has disconnected");
             }
 
 
@@ -40,20 +42,19 @@ namespace TcpServer
 
             NetworkStream stream = client.GetStream();
 
-            bytesRead = stream.Read(buffer, 0, buffer.Length);
-            string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
-            Console.WriteLine("Odebrano: {0}", dataReceived);    
+            //bytesRead = stream.Read(buffer, 0, buffer.Length);
+            //string dataReceived = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+            //Console.WriteLine("Odebrano: {0}", dataReceived);    
 
-            bytesRead = stream.Read(buffer, 0, dataReceived.Length);
-            string jsonData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-            Console.WriteLine("Server received gamedata");
+            while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
+            {
+                string jsonData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                Console.WriteLine("Server received gamedata");
+                Console.WriteLine(jsonData);
 
-            Console.WriteLine(jsonData);
-
-            DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
-
-            Console.WriteLine($"{ dataServer.Title }" );
-
+                DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
+                Console.WriteLine($"{dataServer.Title}");
+            }
         }
 
 

@@ -18,13 +18,11 @@ using System.Windows.Shapes;
 
 namespace GameManager.View
 {
-    /// <summary>
-    /// Interaction logic for AddGameWindow.xaml
-    /// </summary>
     public partial class AddGameWindow : Window
     {
-        private readonly Client _client;
         static int _gameId = 1;
+        private Client _client;
+
         public AddGameWindow(Client client)
         {
             InitializeComponent();
@@ -33,28 +31,16 @@ namespace GameManager.View
 
         private void AddGame_Click(object sender, RoutedEventArgs e)
         {
-            DataClient gameData = new DataClient();
+            DataClient gameData = new DataClient()
+            {
+                GameId = _gameId,
+                Title = TitleBox.Text,
+                Developer = DeveloperBox.Text,
+                Rating = RatingBox.Text,
+                Review = ReviewBox.Text
+            };
 
-            gameData.GameId = _gameId;  
-            gameData.Title = TitleBox.Text;
-            gameData.Developer = DeveloperBox.Text;
-            gameData.Raiting = RaitingBox.Text;
-            gameData.Review = ReviewBox.Text;
-
-
-            string jsonString = JsonSerializer.Serialize(gameData);
-
-            string directoryPath = @"C:\json";
-            string filename = "gamedata.json";
-
-            string filepath = System.IO.Path.Combine(directoryPath, filename);
-
-            File.WriteAllText(filepath, jsonString);
-
-            //MessageBox.Show($"GameID: {gameData.GameId}, Title: {gameData.Title}, Dev: {gameData.Developer}, Raiting: {gameData.Raiting}, Review: {gameData.Review}");
-           // MessageBox.Show(gameData.ToString());
-
-            //_client.SendGameData(gameData);
+            _client.SendGameData(gameData);
             _gameId++;
             this.Close();
         }

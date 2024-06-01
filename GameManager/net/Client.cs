@@ -11,13 +11,11 @@ namespace GameManager.net
 {
     public class Client
     {
-        private string username;
         private TcpClient client;
         private NetworkStream stream;
 
-        public Client(string _username)
+        public Client()
         {
-            username = _username;
             client = new TcpClient();
         }
 
@@ -28,14 +26,8 @@ namespace GameManager.net
             if (!client.Connected)
             {
                 client.Connect("127.0.0.1", 12345);
+                stream = client.GetStream();
             }
-
-
-            byte[] DataToSend = Encoding.ASCII.GetBytes(username);
-            stream = client.GetStream();
-
-            stream.Write(DataToSend, 0, DataToSend.Length);
-
         }
 
 
@@ -50,12 +42,18 @@ namespace GameManager.net
         {
             try
             {
-                if (client.Connected)
+
+                if (!client.Connected)
                 {
-                    string jsonString = JsonSerializer.Serialize(data);
-                    byte[] dataToSend = Encoding.UTF8.GetBytes(jsonString);
-                    stream.Write(dataToSend, 0, dataToSend.Length);
+                    ConnectToServer();
+
                 }
+
+                string jsonString = JsonSerializer.Serialize(data);
+                byte[] dataToSend = Encoding.UTF8.GetBytes(jsonString);
+                stream.Write(dataToSend, 0, dataToSend.Length);
+                stream.Flush();
+                
             }
             catch (JsonException e)
             {
