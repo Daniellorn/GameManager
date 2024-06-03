@@ -1,4 +1,6 @@
-﻿using GameManager.net;
+﻿using GameManager.Model;
+using GameManager.net;
+using GameManager.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +24,15 @@ namespace GameManager.View
     public partial class SecondWindow : Window
     {
         private Client _tcpClient;
+        private GameViewModel _viewModel;
         public SecondWindow(string username)
         {
             InitializeComponent();
             Username.Text = username;
-            _tcpClient = new Client();
+            _tcpClient = new Client();  
             _tcpClient.ConnectToServer();
+            _viewModel = new GameViewModel();
+            DataContext = _viewModel;
         }
 
         private void Close_Button_Click(object sender, RoutedEventArgs e)
@@ -40,6 +45,23 @@ namespace GameManager.View
         {
             AddGameWindow addGameWindow = new AddGameWindow(_tcpClient);
             addGameWindow.Show();
+        }
+
+        private void Load_games_button_Click(object sender, RoutedEventArgs e)
+        {
+            List<DataClient> games = _tcpClient.GetData();
+            _viewModel.Games.Clear();
+
+            foreach (var game in games)
+            {
+                _viewModel.Games.Add(game);
+            }
+        }
+
+        private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteGameWindow deleteGameWindow = new DeleteGameWindow(_tcpClient);
+            deleteGameWindow.Show();
         }
     }
 }

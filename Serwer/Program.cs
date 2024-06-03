@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.IO;
 using Serwer.Data;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 
 namespace TcpServer
@@ -37,7 +38,7 @@ namespace TcpServer
         static void HandleClient(TcpClient client) 
         {
 
-            byte[] buffer = new byte[1024];
+            byte[] buffer = new byte[4096];
             int bytesRead;
 
             NetworkStream stream = client.GetStream();    
@@ -45,15 +46,54 @@ namespace TcpServer
             while ((bytesRead = stream.Read(buffer, 0, buffer.Length)) != 0)
             {
                 string jsonData = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                Console.WriteLine("Server received gamedata");
+                Console.WriteLine("Server received data");
                 Console.WriteLine(jsonData);
 
-                DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
-                Console.WriteLine($"{dataServer.Title}");
+                MsgServer msgServer;
 
+                if (jsonData == "GetData")
+                {
+                    UsingDB usingDB = new UsingDB();
+                    var data = usingDB.GetAllData();
 
-                var SaveToDB = new UsingDB();
-                SaveToDB.SaveData(dataServer);
+                    string Response = JsonSerializer.Serialize(data);
+                    byte[] ResponseBytes = Encoding.UTF8.GetBytes(Response);
+                    stream.Write(ResponseBytes, 0, ResponseBytes.Length);
+                    stream.Flush();
+
+                    Console.WriteLine(Response);
+                }
+                else if ((msgServer = JsonSerializer.Deserialize<MsgServer>(jsonData)).msg == "Delete")
+                {
+                    UsingDB usingDB = new UsingDB();
+
+                    Console.WriteLine(msgServer.id);
+                    bool result = usingDB.DeleteData(msgServer.id);
+
+                    Console.WriteLine(result);
+
+                    if (!result)
+                    {
+                        byte[] requestMsg = Encoding.UTF8.GetBytes("Element does not exist.");
+                        stream.Write(requestMsg, 0, requestMsg.Length);
+                        stream.Flush();
+                    }
+                    else
+                    {
+                        byte[] requestMsg = Encoding.UTF8.GetBytes("Element removed");
+                        stream.Write(requestMsg, 0, requestMsg.Length);
+                        stream.Flush();
+                    }
+
+                }
+                else
+                {
+                    DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
+                    Console.WriteLine($"{dataServer.Title}");
+                    var SaveToDB = new UsingDB();
+                    SaveToDB.SaveData(dataServer);
+
+                }
 
             }
         }

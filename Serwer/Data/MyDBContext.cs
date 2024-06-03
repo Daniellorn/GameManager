@@ -19,6 +19,10 @@ namespace Serwer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DataServer>().HasKey(d => d.GameId);
+            modelBuilder.Entity<DataServer>().Property(m => m.Developer).IsRequired(false);
+            modelBuilder.Entity<DataServer>().Property(m => m.Review).IsRequired(false);
+            modelBuilder.Entity<DataServer>().Property(m => m.Rating).IsRequired(false);
+            modelBuilder.Entity<DataServer>().Property(m => m.Title).IsRequired(false);
         }
     }
 }

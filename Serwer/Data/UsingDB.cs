@@ -20,5 +20,35 @@ namespace Serwer.Data
             }
         }
 
+        public List<DataServer> GetAllData()
+        {
+            using (var context = new MyDBContext())
+            {
+                return context.Games.ToList();
+            }
+        }
+
+
+        public bool DeleteData(int id)
+        {
+            using (var context = new MyDBContext())
+            {
+                var dataToRemove = context.Games.FirstOrDefault(g => g.GameId == id);
+                if (dataToRemove != null)
+                {
+                    context.Games.Remove(dataToRemove);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    Console.WriteLine($"Element with ID {id} does not exist.");
+                    return false;
+                }
+
+            }
+
+            return true;
+        }
+
     }
 }

@@ -10,10 +10,10 @@ namespace GameManager.Model
     public class DataClient
     {
         public int GameId { get; set; }
-        public string Title { get; set; }
-        public string Developer { get; set; }
-        public string Rating { get; set; }
-        public string Review { get; set; }
+        public string? Title { get; set; }
+        public string? Developer { get; set; }
+        public string? Rating { get; set; }
+        public string? Review { get; set; }
 
     }
 }

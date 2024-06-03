@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GameManager.net
 {
@@ -13,6 +14,7 @@ namespace GameManager.net
     {
         private TcpClient client;
         private NetworkStream stream;
+        private MsgClient msgclient;
 
         public Client()
         {
@@ -63,6 +65,51 @@ namespace GameManager.net
             {
                 Console.WriteLine($"Error sending msg: {e.Message}");
             }
+        }
+
+
+        public List<DataClient> GetData()
+        {
+            List<DataClient> dataClients = new List<DataClient>();
+
+            if (!client.Connected)
+            {
+                ConnectToServer();
+            }
+
+            byte[] requestMsg = Encoding.UTF8.GetBytes("GetData");
+            stream.Write(requestMsg, 0, requestMsg.Length);
+            stream.Flush();
+
+            byte[] response = new byte[4096];
+            int bytesRead = stream.Read(response, 0, response.Length);
+            string json = Encoding.UTF8.GetString(response, 0, bytesRead);
+
+            dataClients = JsonSerializer.Deserialize<List<DataClient>>(json);
+            
+
+            return dataClients;
+        }
+
+
+        public string DeleteFun(MsgClient message)
+        {
+
+            if (!client.Connected)
+            {
+                ConnectToServer();
+            }
+
+            string jsonMsg = JsonSerializer.Serialize(message);
+            byte[] dataMsg = Encoding.UTF8.GetBytes(jsonMsg);
+            stream.Write(dataMsg, 0, dataMsg.Length);
+            stream.Flush();
+
+            byte[] response = new byte[1024];
+            int bytesRead = stream.Read(response, 0, response.Length);
+            string result = Encoding.UTF8.GetString(response, 0, bytesRead);
+
+            return result;
         }
 
     }
