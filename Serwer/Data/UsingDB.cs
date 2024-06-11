@@ -15,6 +15,7 @@ namespace Serwer.Data
             {
                 context.Database.EnsureCreated();
 
+                Console.WriteLine("dlaczego tu jestes");
                 context.Games.Add(data);
                 context.SaveChanges();
             }
@@ -50,5 +51,26 @@ namespace Serwer.Data
             return true;
         }
 
+
+        public void EditData(DataServer editdata, int id)
+        {
+            using (var context = new MyDBContext())
+            {
+                var game = context.Games.FirstOrDefault(g => g.GameId == id);
+
+                if (game != null)
+                {
+                    game.Title = editdata.Title;
+                    game.Developer = editdata.Developer;
+                    game.Rating = editdata.Rating;
+                    game.Review = editdata.Review;
+                }
+
+                Console.WriteLine($"{game.GameId}, {game.Title}, {game.Developer}, {game.Rating}, {game.Review}");
+
+                context.SaveChanges();
+            }
+
+        }
     }
 }

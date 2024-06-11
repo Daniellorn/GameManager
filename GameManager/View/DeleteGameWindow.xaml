@@ -15,7 +15,8 @@
 
     <Border
         Background="#272537"
-        CornerRadius="10">
+        CornerRadius="10"
+        MouseDown="Border3_MouseDown">
 
 
 

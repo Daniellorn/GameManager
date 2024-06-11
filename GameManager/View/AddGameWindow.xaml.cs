@@ -1,5 +1,4 @@
-﻿using GameManager.Model;
-using GameManager.net;
+﻿using GameManager.net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GameManager.Model;
 
 namespace GameManager.View
 {
@@ -39,6 +39,19 @@ namespace GameManager.View
             };
 
             _client.SendGameData(gameData);
+            this.Close();
+        }
+
+        private void Border4_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Close_Button_Click_1(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

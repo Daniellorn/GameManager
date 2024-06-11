@@ -89,9 +89,20 @@ namespace TcpServer
                 else
                 {
                     DataServer dataServer = JsonSerializer.Deserialize<DataServer>(jsonData);
-                    Console.WriteLine($"{dataServer.Title}");
-                    var SaveToDB = new UsingDB();
-                    SaveToDB.SaveData(dataServer);
+
+                    if (dataServer.GameId != 0)
+                    {
+                        UsingDB data = new UsingDB();
+                        Console.WriteLine("edit");
+                        data.EditData(dataServer, dataServer.GameId);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{dataServer.Title}");
+                        UsingDB SaveToDB = new UsingDB();
+                        SaveToDB.SaveData(dataServer);
+
+                    }
 
                 }
 

@@ -14,7 +14,8 @@
 
     <Border Background="#272537"
             CornerRadius="20"
-            Padding="20">
+            Padding="20"
+            MouseDown="Border_MouseDown">
         <StackPanel>
 
             <StackPanel

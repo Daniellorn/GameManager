@@ -63,5 +63,19 @@ namespace GameManager.View
             DeleteGameWindow deleteGameWindow = new DeleteGameWindow(_tcpClient);
             deleteGameWindow.Show();
         }
+
+        private void Border2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void Edit_Button_Click(object sender, RoutedEventArgs e)
+        {
+            EditGameWindow editGameWindow = new EditGameWindow(_tcpClient);
+            editGameWindow.Show();
+        }
     }
 }

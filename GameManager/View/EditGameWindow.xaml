@@ -1,22 +1,22 @@
-﻿<Window x:Class="GameManager.View.AddGameWindow"
+﻿<Window x:Class="GameManager.View.EditGameWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameManager.View"
         mc:Ignorable="d"
-        Title="AddGameWindow" 
+        Title="EditGameWindow" 
         Height="450" 
         Width="800"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="Manual"
         ResizeMode="NoResize"
         WindowStyle="None"
         Background="Transparent">
 
     <Border Background="#272537"
             CornerRadius="10"
-            MouseDown="Border4_MouseDown">
+            MouseDown="Border5_MouseDown">
 
 
         <Grid>
@@ -25,36 +25,52 @@
                 <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            
+
             <StackPanel Height="auto">
+
+
+                <TextBlock  Text="ID"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            Foreground="White"
+                            FontSize="20"
+                            Margin="10,15,0,0"/>
+
+                <TextBox    Width="125"
+                            Height="25"
+                            HorizontalAlignment="Left"
+                            Margin="10"
+                            FontSize="15"
+                            x:Name="IDBox"/>
+
 
                 <TextBlock  Text="Title"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Foreground="White"
                             FontSize="20"
-                            Margin="10,50,0,0"/>
+                            Margin="10,40,0,0"/>
 
                 <TextBox    Width="125"
                             Height="25"
                             HorizontalAlignment="Left"
                             Margin="10"
                             FontSize="15"
-                            x:Name="TitleBox"/>
+                            x:Name="EditTitleBox"/>
 
                 <TextBlock  Text="Developer"
                             VerticalAlignment="Center"
                             HorizontalAlignment="Left"
                             Foreground="White"
                             FontSize="20"
-                            Margin="10,50,0,0"/>
+                            Margin="10,40,0,0"/>
 
                 <TextBox    Width="125"
                             Height="25"
                             HorizontalAlignment="Left"
                             Margin="10"
                             FontSize="15"
-                            x:Name="DeveloperBox"/>
+                            x:Name="EditDeveloperBox"/>
 
 
                 <TextBlock  Text="Rating"
@@ -62,14 +78,14 @@
                             HorizontalAlignment="Left"
                             Foreground="White"
                             FontSize="20"
-                            Margin="10,50,0,0"/>
+                            Margin="10,40,0,0"/>
 
                 <TextBox    Width="125"
                             Height="25"
                             HorizontalAlignment="Left"
                             Margin="10"
                             FontSize="15"
-                            x:Name="RatingBox">
+                            x:Name="EditRatingBox">
                 </TextBox>
 
             </StackPanel>
@@ -91,9 +107,9 @@
                      Margin="100,20,0,0"
                      Padding="5"
                      TextWrapping="Wrap"
-                     x:Name="ReviewBox"/>
+                     x:Name="EditReviewBox"/>
 
-            <Button Content="Add Game"
+            <Button Content="Edit Game"
                     Width="150"
                     Height="30"
                     Grid.Column="1"
@@ -101,10 +117,10 @@
                     HorizontalContentAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0,0,0,30" 
-                    Click="AddGame_Click"/>
+                    Click="EditGame_Click"/>
 
 
-            <Button x:Name="Close_Button"
+            <Button x:Name="EditClose_Button"
                     Content="Close"
                     Width="150"
                     Height="30"
@@ -112,11 +128,11 @@
                     VerticalAlignment="Bottom"
                     HorizontalContentAlignment="Center"
                     HorizontalAlignment="Right"
-                    Margin="0,0,200,30" Click="Close_Button_Click_1"/>        
+                    Margin="0,0,200,30" Click="EditClose_Button_Click"/>
 
         </Grid>
-        
+
     </Border>
-    
-    
+
+
 </Window>
